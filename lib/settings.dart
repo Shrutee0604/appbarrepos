@@ -4,9 +4,25 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Settings"),
-      ),
+     body: CustomScrollView(
+       slivers: [
+         SliverAppBar(
+           pinned: true,
+           snap: false,
+           floating: false,
+           flexibleSpace: Container(
+             color: Colors.blue,
+           ),
+           expandedHeight: 200,
+         ),
+         SliverList(delegate: SliverChildBuilderDelegate(
+                 (context, index) => ListTile(
+                   title: Text('${index+1}'),
+                 )
+         )
+         )
+       ],
+     ),
     );
   }
 }
