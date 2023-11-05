@@ -1,4 +1,5 @@
 import 'package:appbar/about_us.dart';
+import 'package:appbar/bottom_nav_bar.dart';
 import 'package:appbar/contact_us.dart';
 import 'package:appbar/profile.dart';
 import 'package:appbar/settings.dart';

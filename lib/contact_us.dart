@@ -31,6 +31,12 @@ class _ContactUsState extends State<ContactUs> with SingleTickerProviderStateMix
    });
   }
 
+
+  List<Widget> listNavPages=[
+    ChatsTabPage(),
+    StatusTabPage()
+  ];
+  int mSelectedIndex=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,14 +78,44 @@ class _ContactUsState extends State<ContactUs> with SingleTickerProviderStateMix
         ),
       ),
      body:TabBarView(
-       controller: mTabController,
-       children: [
-         Container(color: Colors.pink,),
-         ChatsTabPage(),
-         StatusTabPage(),
-         CallsTabPage()
-       ],
-     ) ,
+           controller: mTabController,
+           children: [
+             Container(color: Colors.pink,),
+             ChatsTabPage(),
+             StatusTabPage(),
+             CallsTabPage()
+           ],
+         ),
+
+
+
+
+
+      //listNavPages[mSelectedIndex] ,
+
+
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.grey.shade300,
+        indicatorColor: Colors.orange.shade300,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        selectedIndex: mSelectedIndex,
+        onDestinationSelected: (index){
+          mSelectedIndex=index;
+          setState(() {
+
+          });
+        },
+        destinations: [
+          NavigationDestination(
+              icon: Icon(Icons.home),
+              label: "Home"
+          ),
+          NavigationDestination(
+              icon: Icon(Icons.account_circle),
+              label: "Profile"
+          )
+        ],
+      ),
     );
   }
 }
