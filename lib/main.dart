@@ -1,5 +1,4 @@
 import 'package:appbar/about_us.dart';
-import 'package:appbar/bottom_nav_bar.dart';
 import 'package:appbar/contact_us.dart';
 import 'package:appbar/profile.dart';
 import 'package:appbar/settings.dart';
@@ -39,6 +38,25 @@ class _MyHomePageState extends State<MyHomePage> {
     {"icon":Icons.photo,"title":"Gallery"},
     {"icon": Icons.logout, "title": "Logout"},
   ];
+
+  List<Map<String,dynamic>> drawerItemList=[
+    {"icon":Icons.home,"title":"Home"},
+    {"icon":Icons.account_circle,"title":"My Profile"},
+    {"icon":Icons.settings,"title":"Settings"},
+    {"icon":Icons.info_outline,"title":"About Us"},
+    {"icon":Icons.logout,"title":"Logout"}
+  ];
+  List<Widget> drawerNavigationItemList=[
+  //  MyHomePage(),
+    Container(
+      color: Colors.brown,
+      child: Center(child: Text("Home")),
+    ),
+    Profile(),
+    Settings(),
+    AboutUs(),
+  ];
+  int mSelectedIndex=0;
 String mInitialValue="";
 // String mInitialValue="Settings";
 @override
@@ -54,7 +72,7 @@ String mInitialValue="";
         title: Text("Home"),
         shadowColor: Colors.indigo,
         elevation: 5,
-        leading: Icon(Icons.account_box),
+       // leading: Icon(Icons.account_box),
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.vertical(bottom: Radius.elliptical(10, 20)),
@@ -203,6 +221,67 @@ String mInitialValue="";
                  )*/
           )
         ],
+      ),
+     body: drawerNavigationItemList[mSelectedIndex],
+      drawer: Drawer(
+        width: 300,
+        shadowColor: Colors.pink,
+        elevation: 20,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              height: 250,
+              color: Colors.grey,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                 height: 50,
+                  
+                  child: Row(
+                    children: [
+                      CircleAvatar(),
+                      SizedBox(width: 10,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Webster Technologies"),
+                      Text("webstertechnologies@gmail.com")
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount:drawerItemList.length,
+                    itemBuilder: (_,index){
+                      return InkWell(
+                        onTap: (){
+                          if(index==4){
+                            //dialog
+                          }else{
+                           mSelectedIndex=index;
+                           setState(() {});
+                          }
+                          Navigator.pop(context);
+                        },
+                        child: ListTile(
+                          leading: Icon(drawerItemList[index]["icon"]),
+                          title: Text(drawerItemList[index]["title"]),
+                        ),
+                      );
+                    },
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Version 1.0"),
+            )
+          ],
+        ),
       ),
     );
   }
